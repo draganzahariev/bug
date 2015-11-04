@@ -1,0 +1,33 @@
+# IntelliJ files and folders #
+.idea/
+.git/
+*.log
+*.iml
+*.ipr
+*.iws
+*.h2.db
+target/
+out/
+*-sources.jar
+atlassian-ide-plugin.xml
+
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+*.orig
+*.xcodeproj
+*.xcuserstate
+
+
+generated/
+node_modules/
+bower_components/
+
