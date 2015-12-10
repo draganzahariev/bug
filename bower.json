@@ -1,14 +1,15 @@
 {
-  "name": "robot",
-  "version": "0.0.1",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
-  "dependencies": {
-    "angular": "~1.4.5"
-  }
+    "name": "robot",
+    "version": "0.0.1",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+        "angular": "~1.4.5",
+        "angular-repeat-n": ""
+    }
 }

@@ -1,0 +1,1 @@
+var app = angular.module('robot', ['angular-repeat-n']);
