@@ -1,7 +1,6 @@
-app.service('Brain', function () {
+app.service('Brain', function (Body) {
 
     var lastDecision = {};
-
     var goodDecisions = {};
 
 
@@ -19,33 +18,16 @@ app.service('Brain', function () {
         }
     };
 
-    var provideAction = function (input, scope, size) {
-        var action;
+    var provideAction = function (input) {
+        var action = null;
         if (input != null && goodDecisions[input] != null) {
             action = goodDecisions[input];
-        } else {
-            action = randomAction(scope, size);
+        }
+        if (action == null) {
+            action = Body.getRandomAction();
         }
         lastDecision = {input: input, action: action};
         return action;
-    };
-
-    var randomAction = function (scope, size) {
-        var possibilities = [];
-        if (scope.position[0] > 0) {
-            possibilities.push('up');
-        }
-        if (scope.position[0] < size - 1) {
-            possibilities.push('down');
-        }
-        if (scope.position[1] > 0) {
-            possibilities.push('left');
-        }
-        if (scope.position[1] < size - 1) {
-            possibilities.push('right');
-        }
-        var index = Math.round(Math.random() * 100) % (possibilities.length);
-        return possibilities[index];
     };
 
     return {

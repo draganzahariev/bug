@@ -10,7 +10,7 @@
     <table id="chess_board" cellpadding="0" cellspacing="0">
         <tr ng-repeat="h in m.horizontalNumbers">
             <td ng-repeat="v in m.verticalNumbers" id="{{h}}{{v}}">
-                <a href="#" ng-if="m.isFoodPosition([h,v])" class="apple">&#127822;</a>
+                <a href="#" ng-if="m.data[[h,v]]" class="apple">&#127822;</a>
                 <a href="#" ng-if="m.position[0] == h && m.position[1] == v" class="bug">&#128027;</a>
             </td>
         </tr>
@@ -18,12 +18,13 @@
 </div>
 <div class="right:block">
     <div style="float: left;margin-left: 50px">
-        <input type="button" ng-click="m.addFood()" value="Add Food"/>
+        <input type="button" ng-click="m.addRandomFood()" value="Add Food"/>
+
         <div>
-            <span ng-repeat-n="m.eaten">&#127822;</span>
+            <span ng-repeat-n="m.hunger[0]">&#127822;</span>
         </div>
-        <div>{{m.goodDecisions}}
-            <!--<p ng-repeat="item in m.goodDecisions">{{item}}: {{m.goodDecisions[item]}}</p>-->
+        <div>
+            <p ng-repeat="(key, value) in m.goodDecisions">{{key}}: {{value}}</p>
         </div>
 
     </div>
