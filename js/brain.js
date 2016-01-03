@@ -1,38 +1,50 @@
 app.service('Brain', function (Body) {
 
-    var lastDecision = {};
     var goodDecisions = {};
+    var instincts = {"food": "eat"};
 
-
-    var award = function () {
-        var input = lastDecision['input'];
-        var action = lastDecision['action'];
-        if (input != null && goodDecisions[input] == null) {
-            goodDecisions[input] = action;
+    var rememberAsGood = function (sight, action) {
+        if (sight) {
+            goodDecisions[sight] = action;
+            console.info('remembered as good: ' + sight + " -> " + action);
         }
     };
 
-    var process = function (input) {
-        if (goodDecisions[input] != null) {
-            award();
+    var forget = function (sight, action) {
+        if (sight && goodDecisions[sight] == action) {
+            delete goodDecisions[sight];
+            console.info("forgot: " + sight + " -> " + action);
+        }
+    };
+
+    var provideFeedback = function (sight, action, newSight) {
+        if (newSight in instincts) {
+            rememberAsGood(sight, action);
+        } else if (newSight in goodDecisions) {
+            rememberAsGood(sight, action);
+        } else {
+            forget(sight, action);
         }
     };
 
     var provideAction = function (input) {
         var action = null;
-        if (input != null && goodDecisions[input] != null) {
-            action = goodDecisions[input];
+        if (input != undefined) {
+            if (instincts[input] != undefined) {
+                action = instincts[input];
+            } else if (goodDecisions[input] != undefined) {
+                action = goodDecisions[input];
+            }
         }
         if (action == null) {
             action = Body.getRandomAction();
         }
-        lastDecision = {input: input, action: action};
+
         return action;
     };
 
     return {
-        award: award,
-        process: process,
+        provideFeedback: provideFeedback,
         provideAction: provideAction,
         goodDecisions: goodDecisions
     };

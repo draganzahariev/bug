@@ -13,18 +13,17 @@ app.service('Behavior', function ($rootScope, Body, Brain, World, $interval) {
     }, 100);
 
     var doSomething = function () {
-        var input = Body.see();
-        var action = Brain.provideAction(input);
-        Body.moveTo(action);
-        if (Body.isOnFoodPosition()) {
-            Brain.award();
+        var sight = Body.see();
+        var action = Brain.provideAction(sight);
+        if (action == "eat") {
             hunger[0] > 5 ? hunger[0] -= 5 : hunger[0] = 0;
             Body.eat();
             World.addRandomFood();
         } else {
-            var newInput = Body.see();
-            Brain.process(newInput);
+            Body.moveTo(action);
         }
+        var newSight = Body.see();
+        Brain.provideFeedback(sight, action, newSight);
     };
 
     return {

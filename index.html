@@ -21,7 +21,7 @@
         <input type="button" ng-click="m.addRandomFood()" value="Add Food"/>
 
         <div>
-            <span ng-repeat-n="m.hunger[0]">&#127822;</span>
+            <span ng-repeat-n="m.hunger[0] % 10">&#127822;</span>&nbsp;No {{m.hunger[0]}}
         </div>
         <div>
             <p ng-repeat="(key, value) in m.goodDecisions">{{key}}: {{value}}</p>

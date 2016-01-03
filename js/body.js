@@ -21,6 +21,9 @@ app.service('Body', function ($rootScope, World) {
     };
 
     var see = function () {
+        if (isOnFoodPosition()) {
+            return "food";
+        }
         var pos = [position[0] - 1, position[1]];
         if (World.isFoodPosition(pos)) {
             return 'food-up';
@@ -85,7 +88,6 @@ app.service('Body', function ($rootScope, World) {
         getRandomAction: getRandomAction,
         see: see,
         moveTo: moveTo,
-        isOnFoodPosition: isOnFoodPosition,
         eat: eat,
         position: position
     };
